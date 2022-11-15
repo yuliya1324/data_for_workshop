@@ -31,7 +31,7 @@ class MaskExperiment:
         if self.model_name == 'google/mt5-small':
             self.tokenizer = AutoTokenizer.from_pretrained(self.model_name)
             self.model = AutoModelForSeq2SeqLM.from_pretrained(self.model_name)
-            _ = self.model.to(self.device)
+            self.model = self.model.to(self.device)
         elif self.model_name in self.available_models:
             self.unmasker = pipeline("fill-mask", model=self.model_name)
         else:
