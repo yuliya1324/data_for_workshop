@@ -21,7 +21,7 @@ class MaskExperiment:
                         "sberbank-ai/ruBert-large"
                         ]
         self.masks = {
-            "sberbank-ai/RoBERTa-large": " <mask> ",
+            "sberbank-ai/ruRoberta-large": " <mask> ",
             "google/mt5-small": "<extra_id_0>",
             "cointegrated/rubert-tiny2": " [MASK] ",
             "DeepPavlov/rubert-base-cased": " [MASK] ",
