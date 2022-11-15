@@ -1,0 +1,5 @@
+torch
+pymorphy2
+transformers
+sentencepiece
+pandas
