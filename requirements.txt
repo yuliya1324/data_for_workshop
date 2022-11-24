@@ -3,3 +3,8 @@ pymorphy2
 transformers
 sentencepiece
 pandas
+numpy
+scikit_learn
+matplotlib
+seaborn
+tqdm
