@@ -83,9 +83,9 @@ class AttentionMapExperiment():
     def role_similarity(self):
         top_attention_flat = {k: self.role_peaks[k].flatten() for k in self.role_peaks}
         top_attention_flat["all"] = self.get_peaks(self.attentions[:, :]).flatten()
-        cos_dist = cosine_distances(list(top_attention_flat.values()))
-        matrix = np.triu(cos_dist)
-        sns.heatmap(cos_dist, mask=matrix,
+        cos_sim = 1 - cosine_distances(list(top_attention_flat.values()))
+        matrix = np.triu(cos_sim)
+        sns.heatmap(cos_sim, mask=matrix,
                     xticklabels=top_attention_flat.keys(), yticklabels=top_attention_flat.keys())
         plt.title(f"Roles similarities for {self.model_name}")
         plt.show()
@@ -94,8 +94,8 @@ class AttentionMapExperiment():
         role_peaks_flat = np.array([self.role_peaks[k].flatten() for k in self.role_peaks])
         data_peaks = [self.get_peaks(self.attentions[i, :].unsqueeze(0)).flatten() for i in range(len(self.data))]
         data_peaks = np.stack(data_peaks, axis=0)
-        cos_dist = cosine_distances(data_peaks, role_peaks_flat)
-        pred = cos_dist.argmax(axis=1)
+        cos_sim = 1 - cosine_distances(data_peaks, role_peaks_flat)
+        pred = cos_sim.argmax(axis=1)
         accuracy = (pred == self.data["role_idx"]).sum() / self.data.shape[0]
         #print(f"Role prediction accuracy using attentions data for {self.model_name} is {round(accuracy, 4)}")
         return accuracy
